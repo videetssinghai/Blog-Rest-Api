@@ -1,0 +1,1 @@
+/home/videet/Desktop/blog-api/src/manage.py
