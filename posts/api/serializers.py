@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer, HyperlinkedIdentityField
+from rest_framework.serializers import ModelSerializer, HyperlinkedIdentityField, SerializerMethodField
 from posts.models import Post
 
 
@@ -30,6 +30,7 @@ class PostListSerializer(ModelSerializer):
         view_name='posts-api:detail',
         lookup_field='slug'
     )
+    user = SerializerMethodField()
 
     class Meta:
         model = Post
@@ -40,3 +41,8 @@ class PostListSerializer(ModelSerializer):
             'content',
             'publish',
         ]
+
+    def get_user(self,obj):
+        return str(obj.user.username)
+
+
