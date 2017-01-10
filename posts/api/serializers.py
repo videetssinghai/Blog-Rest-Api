@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer, HyperlinkedIdentityField, SerializerMethodField
 from posts.models import Post
-
-
+from comments.api.serializers import CommentSerializer
+from comments.models import Comment
 
 class PostCreateUpdateSerializer(ModelSerializer):
     class Meta:
@@ -14,6 +14,7 @@ class PostCreateUpdateSerializer(ModelSerializer):
         ]
 
 class PostDetailsSerializer(ModelSerializer):
+    comments = SerializerMethodField()
     class Meta:
         model = Post
         fields = [
@@ -22,7 +23,17 @@ class PostDetailsSerializer(ModelSerializer):
             'slug',
             'content',
             'publish',
+            'comments'
         ]
+
+    def get_comments(self,obj):
+        content_type = obj.get_content_type
+        object_id = obj.id
+        c_qs = Comment.objects.filter_by_instance(obj)
+        comments = CommentSerializer(c_qs,many=True).data
+        return comments
+
+
 
 
 class PostListSerializer(ModelSerializer):
