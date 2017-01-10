@@ -8,5 +8,5 @@ from .views import (
 
 urlpatterns = [
     url(r'^$', CommentListAPIView.as_view(), name='list'),
-    url(r'^(?P<id>\d+)/$', CommentDetailAPIView.as_view(), name='detail'),
+    url(r'^(?P<pk>\d+)/$', CommentDetailAPIView.as_view(), name='detail'),
 ]

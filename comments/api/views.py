@@ -1,8 +1,8 @@
 from rest_framework.generics import (CreateAPIView, ListAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView, RetrieveUpdateAPIView)
 from comments.models import Comment
 from .serializers import (
-CommentSerializer
-
+CommentSerializer,
+CommentDetailSerializer
 )
 from rest_framework.permissions import (
 AllowAny, IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
@@ -51,7 +51,7 @@ class CommentListAPIView(ListAPIView):
 
 class CommentDetailAPIView(RetrieveAPIView):
     queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
+    serializer_class = CommentDetailSerializer
     #lookup_field = 'slug'
 
 
