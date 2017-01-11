@@ -40,7 +40,7 @@ class CommentListAPIView(ListAPIView):
 
     def get_queryset(self,*args,**kwargs):
         query = self.request.GET.get("q")
-        queryset_list =  Comment.objects.all()
+        queryset_list =  Comment.objects.filter(id__gte=0)
         if query:
             queryset_list = queryset_list.filter(
                 Q(content__icontains=query) |
