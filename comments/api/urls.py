@@ -3,10 +3,13 @@ from django.contrib import admin
 
 from .views import (
     CommentListAPIView,
-    CommentDetailAPIView
+    CommentDetailAPIView,
+
+
 )
 
 urlpatterns = [
     url(r'^$', CommentListAPIView.as_view(), name='list'),
     url(r'^(?P<pk>\d+)/$', CommentDetailAPIView.as_view(), name='detail'),
+
 ]

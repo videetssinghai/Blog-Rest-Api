@@ -45,7 +45,10 @@ class CommentDetailSerializer(ModelSerializer):
             'timestamp'
         ]
 
+        read_only_fields =['content_type','replies']
+
     def get_replies(self,obj):
         if obj.is_parent:
             return CommentChildSerializer(obj.Children(),many=True).data
         return None
+
